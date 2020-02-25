@@ -1,70 +1,24 @@
 # Two-Dimensional Weight-Constrained Codes
 
-One Paragraph of project description goes here
+A Two-Dimensional Weight-Constrained Codes is a code that holds the following constraint:
+The input is an (n − 1) × (m − 1) binary array and the output is a length n × m binary array, which the Hamming weight of every row and column is at most a half of its size.
+ 
+This project is an implementation of the construction for such a code shown in section 3 the of article: E. Ordentlich and R.M. Roth, “Low complexity two-dimensional weight-constrained codes,” IEEE Transactions on Information Theory, vol. 58, no. 6, pp. 3892–3899, Jun. 2012. 
 
-## Getting Started
+Our implementation includes both an encoder and a decoder.
+The encoder has a worst-case complexity of O(m*n) iterative steps therefore the overall complexity is O(m*n*(m+n)).
+From simulations we performed we deducted that the average case complexity is O(m+n) iterative steps and therefore the averege complexity is O((m+n)^2).
+The decoder has a complexity of O(m+n) iterative steps therefore the overall complexity is O((m+n)^2).
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+An installation of python 3.7 that includes the numpy library
 
-```
-Give examples
-```
 
-### Installing
+## Running the simulations
 
-A step by step series of examples that tell you how to get a development env running
+The file simulation.py contains code for running the Encoder on different inputs.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Running show_results.py outputs several graphs showing the running time of different inputs.  
 
