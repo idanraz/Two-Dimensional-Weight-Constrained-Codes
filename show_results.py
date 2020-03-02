@@ -25,7 +25,13 @@ def create_compare_gragh (filename):
         size = "n*(n/{})".format(filename.split("_")[2])
     p = str(float(filename.split("_")[1]) * 100)[:2]
     plt.title("time and number of iterations as a function of n\n {} matrices\n {} percent chance to write 1".format(size,p))
-    plt.savefig("{}_compare.png".format(filename), bbox_inches='tight')
+    c = None
+    if len(filename.split("_")) > 2:
+        c = filename.split("_")[2]
+    if not c is None:
+        plt.savefig("{}p_{}c.png".format(p,c), bbox_inches='tight')
+    else:
+        plt.savefig("{}p.png".format(p), bbox_inches='tight')
 
     plt.show()
 
@@ -45,10 +51,8 @@ if __name__ == "__main__":
         "results_0.5",
         "results_0.5_1.6",
         "results_0.5_2",
-        "results_0.48",
         "results_0.49",
-        "results_0.51",
-        "results_0.5_4"
+        "results_0.51"
     ]
     for name in datesets:
         create_compare_gragh(name)
