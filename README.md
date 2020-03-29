@@ -22,7 +22,8 @@ We are guessing that with a higher chance to write 1's, the bigger the rows\colu
 - if the chance to write 1 is exactly 50%, the number of iterative steps is linear in the number of rows/columns. we ran simulations on matrices with the shape (n*(n\c)) for different c values and found that this assumptions holds for all of them.
 Examples can be seen in the graphs "50p.png" (where the numbe the number of iterative steps approximates 1.75n), "50p_1.6c.png" and "50p_2c.png" (where the numbe the number of iterative steps approximates 1.4n)
 
-
+We conclude further simulations in order to determine the relationship between the size of the matrix and the number of 'flips' per passage on the rows/columns of the matrix.
+Results of those sumulations can be seen in the graphs "num_loops_per_size.png" and "num_flips_per_loop.png".
 
 ### Prerequisites
 

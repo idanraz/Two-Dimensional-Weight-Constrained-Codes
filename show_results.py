@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import pickle
 
 
 def create_compare_gragh (filename):
@@ -46,13 +47,78 @@ def check_similarity(filename):
     plt.legend()
     plt.show()
 
+
+def num_loops():
+    df = pd.read_csv("loop_count.csv")
+    plt.plot('n','loop_count',data=df,marker='.',ls='--')
+    plt.ylabel("number of loops")
+    plt.xlabel("n (numer of rows)")
+    plt.savefig("num_loops_per_size.png", bbox_inches='tight')
+    plt.show()
+
+
+def partial_steps():
+    size = 5
+    colors = ['r','b','g','y','c'] * 2
+    with open("list_dump","rb") as dump_file:
+        df = pickle.load(dump_file)
+    fig, ax = plt.subplots()
+    lines = list(range(1, size+1))
+    for row in df:
+        tmp_row = row[1][:size]
+        ax.scatter([row[0]] * size, tmp_row, c=colors[:size])
+    # add annotation to the final coll
+    final_row = df[-1]
+    final_list = final_row[1][:size]
+    for i, txt in enumerate(lines):
+        ax.annotate(txt, (final_row[0],final_list[i]), xytext=(3, 3), textcoords='offset pixels')
+
+    x = []
+    yy = [[] for i in range(size)]
+    for row in df:
+        x.append(row[0])
+        for i in range(size):
+            yy[i].append(row[1][i])
+
+    for i in range(size):
+        fit, _, _, _, _ = np.polyfit(x, yy[i], 1, full=True)
+
+        label = "{}: y = {:.3}x + ({:.3})".format(i+1,fit[0],fit[1])
+        y = np.polyval(fit,x)
+        ax.plot(x,y,c=colors[i],label=label)
+
+    ax.legend()
+    plt.ylabel("Number of flips per loop")
+    plt.xlabel("n (number of rows(")
+    plt.savefig("num_flips_per_loop.png", bbox_inches='tight')
+    plt.show()
+
+
+def test():
+    size = 5
+    with open("list_dump", "rb") as dump_file:
+        df = pickle.load(dump_file)
+    x = []
+    yy = [[] for i in range(size)]
+    for row in df:
+        x.append(row[0])
+        for i in range(size):
+            yy[i].append(row[1][i])
+    fit, _, _, _, _ = np.polyfit(x, yy[0], 1,full=True)
+    print(fit)
+    # print(R)
+
 if __name__ == "__main__":
-    datesets = [
-        "results_0.5",
-        "results_0.5_1.6",
-        "results_0.5_2",
-        "results_0.49",
-        "results_0.51"
-    ]
-    for name in datesets:
-        create_compare_gragh(name)
+    # datesets = [
+    #     "results_0.5",
+    #     "results_0.5_1.6",
+    #     "results_0.5_2",
+    #     "results_0.49",
+    #     "results_0.51"
+    # ]
+    # for name in datesets:
+    #     create_compare_gragh(name)
+    # num_loops()
+    # partial_steps()
+    # test()
+    pass
