@@ -1,4 +1,5 @@
 import IterativeEncoder as Encoder
+from IterativeEncoder import SIZE
 from time import time
 import numpy as np
 import pickle
@@ -70,7 +71,7 @@ def partial_steps_simulation():
     for i in range(start, end, steps):
         with open(name, "a+") as res_file:
             total_loop_count = 0
-            total_steps_per_loop = np.array([0] * 10)
+            total_steps_per_loop = np.array([0] * SIZE)
             total_steps = 0
             for _ in range(num_iterations):
                 mat = np.random.choice(a=[1, 0], size=(i,i), p=[p, 1 - p])

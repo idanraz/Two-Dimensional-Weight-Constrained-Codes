@@ -1,7 +1,7 @@
 import numpy as np
 from math import floor
 
-SIZE = 0    #change this in order to save data on the first SIZE iterations of the encoder
+SIZE = 5    #change this in order to save data on the first SIZE iterations of the encoder
 num_iteration_steps = 0
 num_loops = 0
 loop_counter = []
